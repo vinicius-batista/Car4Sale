@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewCarActivity">
+
+    <TextView
+        android:id="@+id/txtNewCar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_car"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="72sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/ptxtModel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/model" />
+
+    <EditText
+        android:id="@+id/ptxtBrand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/brand" />
+
+    <EditText
+        android:id="@+id/ptxtChassis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/chassis" />
+
+    <EditText
+        android:id="@+id/ptxtLicensePlate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/license_plate" />
+
+    <EditText
+        android:id="@+id/ptxtPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/price"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/ptxtPctDiscount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/discount_percentage"
+        android:inputType="number" />
+
+    <ImageButton
+        android:id="@+id/btnTakePictures"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:onClick="onClickTakePictures"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_camera" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_red_light"
+        android:onClick="onClickSave"
+        android:text="@string/save"
+        android:textSize="30sp" />
+
+</LinearLayout>

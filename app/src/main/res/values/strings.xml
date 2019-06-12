@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Car4Sale</string>
+    <string name="new_car">New Car</string>
+    <string name="show_cars">Show Cars</string>
+    <string name="show_cars_for_sale_only">Show Cars for Sale Only</string>
+    <string name="model">Model</string>
+    <string name="brand">Brand</string>
+    <string name="chassis">Chassis</string>
+    <string name="license_plate">License Plate</string>
+    <string name="price">Price</string>
+    <string name="discount_percentage">Discount Percentage</string>
+    <string name="total_price">Total Price</string>
+    <string name="show_car_pictures">Show Car Pictures</string>
+    <string name="car_details">Car Details</string>
+    <string name="see_gallery">See Gallery</string>
+    <string name="done">Done</string>
+    <string name="sold">Sold!!!</string>
+    <string name="save">Save</string>
+    <string name="camera_not_found">Problem: Camera Not Found</string>
+    <string name="empty_fields">Problem: Fields must not be empty</string>
+    <string name="file_not_created">Problem: Failed to create directory</string>
+    <string name="car_sold">This car is no longer for sale anymore!</string>
+    <string name="change_discount">Change discount percentage</string>
+    <string name="cancel">Cancel</string>
+    <string name="discount_changed">Discount percentage updated</string>
+    <string name="discount_not_changed">Discount percentage not updated</string>
+</resources>
