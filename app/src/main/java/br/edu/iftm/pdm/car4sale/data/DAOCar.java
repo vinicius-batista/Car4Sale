@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -16,12 +17,13 @@ public class DAOCar {
         // Você deverá uma função que retorne o próximo valor de ID do carro.
         // Esta função compõe a lógica fundamental para o método DAOCar.insert(...)
         // Integre com a função "semimplementada" de DAOPicture de insert.
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select MAX("+ DBSchema.TCar.ID  +") from "+
-                DBSchema.TCar.TABLE_NAME, null);
 
-        db.close();
-        return Long.parseLong(cursor.getString(0));
+        // Nao ha a necessidade de implementacao pq o metodo insert ja retorna o id da tabela, se
+        // for o caso de id autoincrement. Se ocorrer problemas quando for inserir, ele retornara -1,
+        // entretanto usei o metodo para lancar uma excessao.
+        // fonte: https://stackoverflow.com/questions/5409751/get-generated-id-after-insert
+
+        return 0;
     }
 
     public static void insert(DBHelper dbHelper, Car car) {
@@ -38,8 +40,12 @@ public class DAOCar {
         cv.put(DBSchema.TCar.PCT_DISCOUNT, car.getPctDiscount());
         cv.put(DBSchema.TCar.IS_ON_SALE, car.isOnSale());
 
-        db.insert(DBSchema.TCar.TABLE_NAME, null, cv);
-        DAOPicture.insert(dbHelper, getNextIdValue(dbHelper), car.getPictures());
+        try {
+            long id = db.insertOrThrow(DBSchema.TCar.TABLE_NAME, null, cv);
+            DAOPicture.insert(dbHelper, id, car.getPictures());
+        } catch (Exception e) {
+            Log.d("Exception", e.getLocalizedMessage());
+        }
 
         db.close();
     }

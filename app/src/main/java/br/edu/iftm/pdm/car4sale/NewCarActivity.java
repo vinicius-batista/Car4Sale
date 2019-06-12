@@ -54,17 +54,41 @@ public class NewCarActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == REQUEST_TAKEN_PICTURES_CODE && resultCode == RESULT_OK && data != null) {
+        if (requestCode == REQUEST_TAKEN_PICTURES_CODE && resultCode == RESULT_OK && data != null) {
             // Aqui você receberá como resposta o array preenchido com os paths das imagens inseridas
             this.pictures = data.getParcelableArrayListExtra(TakePicturesActivity.PICTURES_KEY);
         }
     }
 
     public void onClickSave(View view) {
-
-        // TODO Aqui você deverá salvar o carro que foi cadastrado
+        // Aqui você deverá salvar o carro que foi cadastrado
         // Você não deverá permitir que nenhum campo esteja em branco, com exceção da lista de fotos
         // Isso também deverá implicar na forma como você criará a tabela no banco.
+
+        String model = ptxtModel.getText().toString();
+        String brand = ptxtBrand.getText().toString();
+        String chassis = ptxtChassis.getText().toString();
+        String licensePlate = ptxtLicensePlate.getText().toString();
+        String price = ptxtPrice.getText().toString();
+        String pctDiscount = ptxtPctDiscount.getText().toString();
+
+        if (!model.isEmpty() && !brand.isEmpty() && !chassis.isEmpty() && !licensePlate.isEmpty()
+                && !price.isEmpty() && !pctDiscount.isEmpty()) {
+            this.car.setBrand(brand);
+            this.car.setModel(model);
+            this.car.setChassis(chassis);
+            this.car.setLicensePlate(licensePlate);
+            this.car.setPrice(Float.parseFloat(price));
+            this.car.setPctDiscount(Integer.parseInt(pctDiscount));
+            this.car.setOnSale(true);
+            this.car.setPictures(this.pictures);
+
+            DBHelper dbHelper = new DBHelper(this);
+
+            DAOCar.insert(dbHelper, this.car);
+            this.finish();
+            return;
+        }
 
         Toast.makeText(this, getText(R.string.empty_fields), Toast.LENGTH_SHORT).show();
     }

@@ -19,7 +19,7 @@ public class DBSchema {
         public static String getCreateTableQuery() {
             // implemente o método que permite criar a tabela Car no banco
             // Os campos acima correspondem aos campos que deverão ter na tabela
-            return "CREATE TABLE" + TABLE_NAME + " (" +
+            return "CREATE TABLE " + TABLE_NAME + " (" +
                     ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     MODEL + " TEXT NOT NULL, " +
                     BRAND + " TEXT NOT NULL, " +
@@ -44,9 +44,10 @@ public class DBSchema {
             // implemente o método que permite criar a tabela Picture no banco
             // Os campos acima correspondem aos campos que deverão ter na tabela
             // LEMBRE-SE DE QUE A RELAÇÃO É DE 1 CAR PARA N PICTURES
-            return "CREATE TABLE" + TABLE_NAME + " (" +
+            return "CREATE TABLE " + TABLE_NAME + " (" +
                     ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    PATH + "TEXT NOT NULL, " +
+                    PATH + " TEXT NOT NULL, " +
+                    CAR + " INTEGER NOT NULL, " +
                     "FOREIGN KEY("+ CAR +") REFERENCES " + TCar.TABLE_NAME + "(" + TCar.ID +")" +
                     ");";
         }
