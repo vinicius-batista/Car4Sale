@@ -23,7 +23,6 @@ public class ListPicturesActivity extends AppCompatActivity implements PictureAd
     private RecyclerView rvPictures;
     private PictureAdapter pictureAdapter;
     private ArrayList<Picture> pictures;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +48,9 @@ public class ListPicturesActivity extends AppCompatActivity implements PictureAd
 
     @Override
     public void onClickPicture(Bitmap bitmap) {
-        //TODO Aqui você deverá chamar/mostrar um DialogFragment contendo a imagem clicada
+        // Aqui você deverá chamar/mostrar um DialogFragment contendo a imagem clicada
+        PictureDialogFragment pictureDialogFragment = PictureDialogFragment.newInstance(bitmap);
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        pictureDialogFragment.show(fragmentManager, "showpic");
     }
 }
