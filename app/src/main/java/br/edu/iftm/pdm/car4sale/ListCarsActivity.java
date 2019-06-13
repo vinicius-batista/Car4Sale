@@ -47,10 +47,11 @@ public class ListCarsActivity extends AppCompatActivity implements CarAdapter.Ca
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        // TODO Este método funcionava :'(
+        // Este método funcionava :'(
         // Sua função é reconhecer quando o "Switch" é alterado de posição.
         // Experimente o parâmetro "b" dessa função
         // Aqui você deverá filtrar o conteúdo do recyclerview para mostrar somente os carros a venda
+        this.carAdapter.filterOnSaleOnly(b);
     }
 
     @Override

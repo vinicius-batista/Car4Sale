@@ -79,7 +79,7 @@ public class DAOCar {
                 String licensePlate = cursor.getString(cursor.getColumnIndex(DBSchema.TCar.LICENSE_PLATE));
                 float price = cursor.getFloat(cursor.getColumnIndex(DBSchema.TCar.PRICE));
                 int pctDiscount = cursor.getInt(cursor.getColumnIndex(DBSchema.TCar.PCT_DISCOUNT));
-                boolean isOnSale = cursor.getInt(cursor.getColumnIndex(DBSchema.TCar.PCT_DISCOUNT)) == 1;
+                boolean isOnSale = cursor.getInt(cursor.getColumnIndex(DBSchema.TCar.IS_ON_SALE)) == 1;
                 car = new Car(id, model, brand, chassis, licensePlate, price, pctDiscount, isOnSale);
                 pictures = new ArrayList<>();
                 car.setPictures(pictures);

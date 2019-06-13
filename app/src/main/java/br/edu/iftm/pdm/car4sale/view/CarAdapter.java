@@ -46,8 +46,23 @@ public class CarAdapter extends RecyclerView.Adapter<CarViewHolder> {
     }
 
     public void filterOnSaleOnly(boolean onSaleOnly){
-        // TODO use este método para filtrar os carros que estao a venda
+        // use este método para filtrar os carros que estao a venda
         // Use o atributo backupCars para aulixiliá-lo neste método
+        if (onSaleOnly) {
+            this.backupCars = this.cars;
+            ArrayList<Car> onSaleCars = new ArrayList<>();
+            for (Car car: this.cars) {
+                if (car.isOnSale()) {
+                    onSaleCars.add(car);
+                }
+            }
+            this.cars = onSaleCars;
+            this.notifyDataSetChanged();
+            return;
+        }
+
+        this.cars = this.backupCars;
+        this.notifyDataSetChanged();
     }
 
     public void changeToSold(Car carSold){
