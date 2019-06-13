@@ -65,7 +65,8 @@ public class ShowCarActivity extends AppCompatActivity {
 
     public void onClickShowCarPictures(View view) {
         Intent intent = new Intent(this, ListPicturesActivity.class);
-        //TODO esta intent deverá encaminhar a lista de Pictures a ser mostrada
+        // esta intent deverá encaminhar a lista de Pictures a ser mostrada
+        intent.putExtra(ListPicturesActivity.LIST_PICTURE_KEY, this.car.getPictures());
         startActivity(intent);
     }
 

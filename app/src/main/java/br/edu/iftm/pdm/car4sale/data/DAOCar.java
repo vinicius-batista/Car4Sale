@@ -51,16 +51,12 @@ public class DAOCar {
     }
 
     public static ArrayList<Car> getAll(DBHelper dbHelper) {
-        // TODO Vusssshhhhh... Um furacão passou por aqui e levou todas as linhas de código deste método :'(
+        // Vusssshhhhh... Um furacão passou por aqui e levou todas as linhas de código deste método :'(
         // Você deverá implementar este método de forma que pegue TODAS as informações sobre o carro
         // INCLUSIVE as fotos.
         // Você deverá utilizar JOIN de tabelas para pegar os dados completos sobre o carro.
+
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        /*String[] cols = new String[] {
-                DBSchema.Contact.NAME,
-                DBSchema.Contact.PNUMBER,
-                DBSchema.Contact.TIMESTAMP
-        };*/
         ArrayList<Car> cars = new ArrayList<>();
         ArrayList<Picture> pictures = new ArrayList<>();
         long lastId = 0;
