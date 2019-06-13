@@ -33,6 +33,17 @@ public class Car implements Parcelable {
         this.pictures = pictures;
     }
 
+    public Car(long id, String model, String brand, String chassis, String licensePlate, float price, int pctDiscount, boolean isOnSale) {
+        this.id = id;
+        this.model = model;
+        this.brand = brand;
+        this.chassis = chassis;
+        this.licensePlate = licensePlate;
+        this.price = price;
+        this.pctDiscount = pctDiscount;
+        this.isOnSale = isOnSale;
+    }
+
     protected Car(Parcel in) {
         id = in.readLong();
         model = in.readString();

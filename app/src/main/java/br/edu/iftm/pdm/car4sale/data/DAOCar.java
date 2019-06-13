@@ -55,7 +55,52 @@ public class DAOCar {
         // Você deverá implementar este método de forma que pegue TODAS as informações sobre o carro
         // INCLUSIVE as fotos.
         // Você deverá utilizar JOIN de tabelas para pegar os dados completos sobre o carro.
-        return new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        /*String[] cols = new String[] {
+                DBSchema.Contact.NAME,
+                DBSchema.Contact.PNUMBER,
+                DBSchema.Contact.TIMESTAMP
+        };*/
+        ArrayList<Car> cars = new ArrayList<>();
+        ArrayList<Picture> pictures = new ArrayList<>();
+        long lastId = 0;
+
+        // SELECT * FROM contact;
+        String query = "SELECT * FROM " + DBSchema.TCar.TABLE_NAME +
+                " LEFT JOIN " + DBSchema.TPicture.TABLE_NAME +
+                " ON " + DBSchema.TPicture.CAR + " = " +
+                DBSchema.TCar.ID + ";";
+
+        Cursor cursor = db.rawQuery(query, null, null);
+        while(cursor.moveToNext()) {
+            Car car = new Car();
+            long id = cursor.getLong(cursor.getColumnIndex(DBSchema.TCar.ID));
+
+            if (!(lastId == id)) {
+                String model = cursor.getString(cursor.getColumnIndex(DBSchema.TCar.MODEL));
+                String brand = cursor.getString(cursor.getColumnIndex(DBSchema.TCar.BRAND));
+                String chassis = cursor.getString(cursor.getColumnIndex(DBSchema.TCar.CHASSIS));
+                String licensePlate = cursor.getString(cursor.getColumnIndex(DBSchema.TCar.LICENSE_PLATE));
+                float price = cursor.getFloat(cursor.getColumnIndex(DBSchema.TCar.PRICE));
+                int pctDiscount = cursor.getInt(cursor.getColumnIndex(DBSchema.TCar.PCT_DISCOUNT));
+                boolean isOnSale = cursor.getInt(cursor.getColumnIndex(DBSchema.TCar.PCT_DISCOUNT)) == 1;
+                car = new Car(id, model, brand, chassis, licensePlate, price, pctDiscount, isOnSale);
+                pictures = new ArrayList<>();
+                car.setPictures(pictures);
+
+                cars.add(car);
+            }
+
+            long pictureId =  cursor.getLong(cursor.getColumnIndex(DBSchema.TPicture.ID));
+            String path = cursor.getString(cursor.getColumnIndex(DBSchema.TPicture.PATH));
+            Picture picture = new Picture(pictureId, path);
+            pictures.add(picture);
+
+            lastId = id;
+        }
+        cursor.close();
+        db.close();
+        return cars;
     }
 
     public static void sellCar(DBHelper dbHelper, Car car) {
@@ -65,10 +110,10 @@ public class DAOCar {
         ContentValues cv = new ContentValues();
 
         cv.put(DBSchema.TCar.IS_ON_SALE, 0);
-        String[] args = new String[] {
+        String[] args = new String[]{
                 Long.toString(car.getId())
         };
-        db.update(DBSchema.TCar.TABLE_NAME, cv, DBSchema.TCar.ID+" = ?", args);
+        db.update(DBSchema.TCar.TABLE_NAME, cv, DBSchema.TCar.ID + " = ?", args);
         db.close();
         car.setOnSale(false);
     }
@@ -80,10 +125,10 @@ public class DAOCar {
         ContentValues cv = new ContentValues();
 
         cv.put(DBSchema.TCar.PCT_DISCOUNT, car.getPctDiscount());
-        String[] args = new String[] {
+        String[] args = new String[]{
                 Long.toString(car.getId())
         };
-        db.update(DBSchema.TCar.TABLE_NAME, cv, DBSchema.TCar.ID+" = ?", args);
+        db.update(DBSchema.TCar.TABLE_NAME, cv, DBSchema.TCar.ID + " = ?", args);
         db.close();
     }
 }
