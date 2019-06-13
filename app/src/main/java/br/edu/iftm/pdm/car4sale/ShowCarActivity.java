@@ -82,6 +82,9 @@ public class ShowCarActivity extends AppCompatActivity {
     }
 
     public void onClickChangeDiscount(View view) {
-        //TODO Aqui você deverá chamar/mostrar um DialogFragment contendo a caixa de edição do desconto para este carro.
+        // Aqui você deverá chamar/mostrar um DialogFragment contendo a caixa de edição do desconto para este carro.
+        CarDiscountDialogFragment carDiscountDialogFragment = CarDiscountDialogFragment.newInstance(car);
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        carDiscountDialogFragment.show(fragmentManager, "showcardiscount");
     }
 }
