@@ -59,12 +59,31 @@ public class DAOCar {
     }
 
     public static void sellCar(DBHelper dbHelper, Car car) {
-        // TODO Inhaaac... um quokka faminto do sul da austrália passou por aqui e comeu todas as linhas de código desse método
+        // Inhaaac... um quokka faminto do sul da austrália passou por aqui e comeu todas as linhas de código desse método
         // Você deverá implementar um método que permita alterar o estado de um carro de À Venda para Vendido.
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(DBSchema.TCar.IS_ON_SALE, 0);
+        String[] args = new String[] {
+                Long.toString(car.getId())
+        };
+        db.update(DBSchema.TCar.TABLE_NAME, cv, DBSchema.TCar.ID+" = ?", args);
+        db.close();
+        car.setOnSale(false);
     }
 
     public static void changeDiscount(DBHelper dbHelper, Car car) {
-        // TODO Eita... agora fui eu mesmo que removi essas linhas, sorry. :X
+        // Eita... agora fui eu mesmo que removi essas linhas, sorry. :X
         // Você deverá implementar um método que permita alterar o valor da porcentagem de desconto do automóvel.
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(DBSchema.TCar.PCT_DISCOUNT, car.getPctDiscount());
+        String[] args = new String[] {
+                Long.toString(car.getId())
+        };
+        db.update(DBSchema.TCar.TABLE_NAME, cv, DBSchema.TCar.ID+" = ?", args);
+        db.close();
     }
 }
